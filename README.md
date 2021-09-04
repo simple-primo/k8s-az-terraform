@@ -59,5 +59,46 @@ cd k8s-az-terraform
 This directory contains the cluster definition (k8s.tf), the variables definition (variables.tf) and the output definition (output.tf).
 
 
+### 4. Initilize terraform
 
+```bash
+terraform init
+```
 
+### 5. Create an execution plan
+
+```bash
+terraform plan -out out.plan
+```
+
+### 6. Execute the actions proposed in the plan
+
+```bash
+terraform apply "out.plan"
+```
+
+### 7. Test the Kubernetes cluster 
+
+Save kubernetes config file to `~/.kube/aksconfig`
+
+```bash
+terraform output kube_config > ~/.kube/aksconfig
+```
+
+Modify ~/.kube/aksconfig to get a valid YAML file
+
+```bash
+sed -i '1d;$d' ~/.kube/aksconfig
+```
+
+Set `KUBECONFIG` environment variable to the kubernetes config file
+
+```bash
+export KUBECONFIG=~/.kube/aksconfig
+```
+
+Test configuration
+
+```bash
+kubectl get nodes
+```
