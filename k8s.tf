@@ -5,6 +5,12 @@ terraform {
       version = "~>2.0"
     }
   }
+
+  backend "azurerm" {
+    storage_account_name     = "<YourAzureStorageAccountName>"
+    container_name           = "tfstate"
+    key                      = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {

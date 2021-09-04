@@ -58,26 +58,38 @@ cd k8s-az-terraform
 ```
 This directory contains the cluster definition (k8s.tf), the variables definition (variables.tf) and the output definition (output.tf).
 
+### 4. Set up Azure storage to store Terraform state ([https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks#8-set-up-azure-storage-to-store-terraform-state](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks#8-set-up-azure-storage-to-store-terraform-state))
 
-### 4. Initilize terraform
+After create the container, export this environment variable:
+
+```bash
+export ARM_ACCESS_KEY=<YourStorageAccountAccessKey>
+```
+And replace the tag  <YourAzureStorageAccountName> with the corresponding value in k8s.tf
+
+```bash
+storage_account_name     = "<YourAzureStorageAccountName>"
+```
+
+### 5. Initilize terraform
 
 ```bash
 terraform init
 ```
 
-### 5. Create an execution plan
+### 6. Create an execution plan
 
 ```bash
 terraform plan -out out.plan
 ```
 
-### 6. Execute the actions proposed in the plan
+### 7. Execute the actions proposed in the plan
 
 ```bash
 terraform apply "out.plan"
 ```
 
-### 7. Test the Kubernetes cluster 
+### 8. Test the Kubernetes cluster 
 
 Save kubernetes config file to `~/.kube/aksconfig`
 
